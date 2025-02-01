@@ -51,7 +51,7 @@ class SelectAzienda(View):
 
         request.session['azienda'] = azienda_id
         request.session['token'] = token.key
-        return HttpResponseRedirect('/home')
+        return HttpResponseRedirect('/')
 
 
 class CustomAuthToken(ObtainAuthToken):
