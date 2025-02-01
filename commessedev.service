@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn service
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/srv/commesse/dev/
+ExecStart=/srv/commesse/dev/env/bin/gunicorn --log-level error --error-logfile /srv/commesse/dev/logs/error.log --timeout 120 --access-logfile /srv/commesse/dev/logs/misc.log --workers 1 --bind unix:/srv/commesse/dev/commesse.sock commesse.wsgi:application
+
+
+[Install]
+WantedBy=multi-user.target

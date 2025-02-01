@@ -1,0 +1,12 @@
+server {
+    listen      80;
+    server_name commessedev.antonio.it;
+    charset utf-8;
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/srv/commesse/dev/commesse.sock;
+    }
+    location /static/ {
+        root /srv/commesse/dev/;
+    }
+}
