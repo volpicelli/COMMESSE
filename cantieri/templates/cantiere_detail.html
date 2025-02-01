@@ -1,0 +1,28 @@
+{% extends "standard.html" %}
+{% load static %}
+{% block css %}
+  {{ block.super }}
+  {% endblock css %}
+
+  {% block main %}
+  {% include './cantiere_detail_inc.html' %}
+  {% endblock main %}
+
+
+{% block javascript %}
+{{ block.super }}
+<script>
+  $('#personale').on('click',function(e){
+    window.location='/personale/list'
+    })
+  $('#fatture').on('click',function(e){
+    cantiere = $(this).attr('data-cantiere');
+
+      window.location='/cantieri/'+cantiere+'/fatture'
+      })
+  $('#ordini').on('click',function(e){
+    cantiere = $(this).attr('data-cantiere');
+        window.location='/cantieri/'+cantiere+'/ordini'
+        })          
+</script>
+{% endblock javascript %}

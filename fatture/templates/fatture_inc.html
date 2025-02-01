@@ -1,0 +1,144 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Blank Page</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Blank</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+
+
+
+       
+
+
+      <div class="row">
+	    <div class="col-10">
+         <!-- Default Card -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Ore Lavorate</h5>
+          <!-- Small tables -->
+          <table class="table table-sm"> 
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ragione Sociale</th>
+                <th scope="col">N. Fattura</th>
+                <th scope="col">Data Fattura</th>
+                <th scope="col">Importo</th>
+                <th scope="col">Data Scadenza</th>
+                <th scope="col">Pagato</th>
+                <th scope="col">Ordine</th>
+
+              </tr>
+            </thead>                 
+          <tbody>
+            {% for one in fatture %}
+            <tr>
+              <td ><a href="/fatture/{{one.id}}" > {{one.id}} </a></td>
+              <td>{{one.ragione_sociale}}</td>
+              <td>{{one.n_fattura}}</td>
+              <td>{{one.data_fattura}}</td>
+              <td>{{one.importo}}</td>
+              <td>{{one.data_scadenza}}</td>
+              <td>{{one.pagato}}</td>
+              <td>{{one.ordine}}</td>
+            </tr>
+            
+            
+            {% endfor %}
+          </tbody>
+        </table>
+           <!-- End small tables -->
+         
+        </div>
+      </div><!-- End Default Card -->
+
+        </div>   
+      </div>
+    </section>
+
+</main><!-- End #main -->
+<!--
+<div class="row">
+  
+ <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Multi Columns Form</h5>
+
+      <form class="row g-3">
+        <div class="col-md-12">
+          <label for="inputName5" class="form-label">Nome Cantiere</label>
+          <input type="text" name="nome" class="form-control" id="inputName5">
+        </div>
+        <div class="col-12">
+            <label for="id_descrizione" class="form-label">Descrizione</label>
+            <textarea name="descrizione" cols="40" rows="10" class="form-control" id="id_descrizione"></textarea>
+          </div>
+          <div class="col-12">
+            <label for="inputAddress5" class="form-label">Indirizzo</label>
+            <input type="text" class="form-control" id="inputAddress5" placeholder="1234 Main St">
+          </div>
+        <div class="col-md-6">
+          <label for="inputEmail5" class="form-label">Data Inizio Lavori</label>
+          <input type="date" name="data_inizio_lavori" class="form-control" id="inputEmail5">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword5" class="form-label">Data Fine Lavori</label>
+          <input type="date" name="data_fine_lavori" class="form-control" id="inputPassword5">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+
+    </div>
+  </div>     
+
+         
+      </div>
+
+ 
+-->
+
+
+

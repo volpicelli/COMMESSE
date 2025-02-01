@@ -1,0 +1,50 @@
+{% extends "standard.html" %}
+{% load static %}
+{% block css %}
+  {{ block.super }}
+  {% endblock css %}
+
+  {% block main %}
+  {% include './personale_inc.html' %}
+  {% endblock main %}
+
+
+{% block javascript %}
+{{ block.super }}
+<script>
+function removeLavoratoreDaCantiere(id){
+  alert("REMOVE "+id)
+  $.ajax({
+
+    // get html file with entire #ajaxModalPopup html contents
+    url: "/api/assegnatocantiere/remove/"+id,
+    type: 'GET',
+
+    // on success response function
+    success: function(jresponse) {
+
+      // log response
+      console.log(jresponse);
+     
+    },
+
+    // on fail response function
+    error: function() {
+
+      // console err
+      console.log(" error");
+      
+    },
+  }).done(function(){
+        // now show the modal
+        console.log("FATTO")
+        window.location='/personale'
+  });
+
+}
+function aggiungi_ore(id){
+  alert(id)
+  console.log($('#'+id).val())
+}
+</script>
+{% endblock javascript %}

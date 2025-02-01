@@ -1,0 +1,238 @@
+<main id="main" class="main">
+<br>
+    <div class="pagetitle">
+      <h1>CANTIERE - <b><i>  {{cantiere.nome}} </b></i></h1>
+      <!--
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Blank</li>
+        </ol>
+      </nav>
+      -->
+    </div><!-- End Page Title -->
+    <div class="row mb-2">
+      <div class="col-1">
+    <input action="action" type="button" class="secondary" value="<< Indietro" onclick="window.history.go(-1); return false;" />
+    </div>
+  </div>
+    <section class="section">
+
+      <div class="row">
+	     <!-- Sales Card -->
+       <div class="col-xxl-3 col-md-6">
+        <div class="card info-card sales-card">
+
+          <div class="card-body">
+            <h5 class="card-title">Documenti</h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="ri-newspaper-line"></i>
+              </div>
+              <div class="ps-3">
+                <h6>Carica documenti </h6>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Sales Card -->
+
+       <!-- Sales Card -->
+       <div class="col-xxl-3 col-md-6">
+        <div class="card info-card sales-card">
+
+          <div id="fatture" data-cantiere="{{cantiere.id}}"  class="card-body">
+            <h5 class="card-title">Fatture ( {{fatture|length}} )</h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="ri-money-euro-circle-line"></i>
+              </div>
+              <div class="ps-3">
+                <h6>Inserisci una fattura </h6>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Sales Card -->
+
+       <!-- Sales Card -->
+       <div class="col-xxl-3 col-md-6">
+        <div class="card info-card sales-card">
+
+          <div id="ordini" data-cantiere="{{cantiere.id}}" class="card-body">
+            <h5 class="card-title">Ordini ( {{ordini|length}} ) per {{totale_ordini}} Euro</h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-basket3"></i>
+              </div>
+              <div class="ps-3">
+                <h6>Crea un ordine </h6>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Sales Card -->
+
+       <!-- Sales Card -->
+       <div class="col-xxl-3 col-md-6">
+        <div class="card info-card sales-card">
+
+          <div id="personale" class="card-body">
+            <h5 class="card-title">Personale</h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-basket3"></i>
+              </div>
+              <div class="ps-3">
+                <h6>Assegna Personale </h6>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Sales Card -->
+      </div>
+    </section>
+<div class="row">
+    <div class="col-lg-5">
+      
+      <!-- Default Card -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Informazioni Cantiere</h5>
+          <!-- Small tables -->
+          <table class="table table-sm">                  
+          <tbody>
+            <tr>
+              <th scope="row">Manager</th>
+              <td></td>
+              <td>{{cantiere.getResponsabile}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Indirizzo</th>
+              <td></td>
+              <td>{{cantiere.ubicazione}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Commessa</th>
+              <td></td>
+              <td>{{cantiere.valore_commessa}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Data Inizio</th>
+              <td></td>
+              <td>{{cantiere.data_inizio_lavori}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Data Fine</th>
+              <td></td>
+              <td>{{cantiere.data_fine_lavori}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Decrizione</th>
+              <td> </td>
+              <td>{{cantiere.descrizione}}</td>
+            </tr>
+            
+            
+          </tbody>
+        </table>
+           <!-- End small tables -->
+
+
+          Cliente : {{cantiere.cliente.codcf}} <br>
+         
+        </div>
+      </div><!-- End Default Card -->
+    </div>
+
+    <div class="col-lg-7">
+      
+      <!-- Default Card -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Personale assegnato al cantiere / Ore Lavorate </h5>
+          <!-- Small tables -->
+          <table class="table table-sm"> 
+            <thead>
+              <tr>
+                <th scope="col">Lavoratore</th>
+                <th scope="col"></th>
+                <th scope="col">Ore Lavorate</th>
+                <th scope="col">Totale Lordo</th>
+                <th scope="col">Azione</th>
+
+              </tr>
+            </thead>                 
+          <tbody>
+            {% for one in personaleassegnato %}
+            <tr>
+              <td >{{one.personale.cognome}} {{one.personale.nome}}</td>
+              <td></td>
+              <td>{{one.ore_lavorate}}</td>
+              <td>{{one.totale_lordo}}</td>
+              <td>Aggiungi Ore</td>
+            </tr>
+            
+            
+            {% endfor %}
+          </tbody>
+        </table>
+           <!-- End small tables -->
+         
+        </div>
+      </div><!-- End Default Card -->
+    </div>
+</div>
+<div class="row">
+<div class="col-lg-7">
+      
+  <!-- Default Card -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Costo Totale del Cantiere</h5>
+      <!-- Small tables -->
+      <table class="table table-sm"> 
+        <thead>
+          <tr>
+            <th scope="col">Ordini</th>
+            <th scope="col">{{ordini|length}} effettuati </th>
+            <th scope="col">per un totale di {{totale_ordini}} Euro</th>
+            <th scope="col">Totale Lordo</th>
+            <th scope="col">Azione</th>
+
+          </tr>
+        </thead>                 
+      <tbody>
+        {% for one in personaleassegnato %}
+        <tr>
+          <td >{{one.personale.cognome}} {{one.personale.nome}}</td>
+          <td></td>
+          <td>{{one.ore_lavorate}}</td>
+          <td>{{one.totale_lordo}}</td>
+          <td>Aggiungi Ore</td>
+        </tr>
+        
+        
+        {% endfor %}
+      </tbody>
+    </table>
+       <!-- End small tables -->
+     
+    </div>
+  </div><!-- End Default Card -->
+</div>
+</div>
+</main><!-- End #main -->

@@ -1,0 +1,304 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Personale azienda</h1>
+      <!--
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Blank</li>
+        </ol>
+      </nav>
+      -->
+    </div><!-- End Page Title -->
+    <div class="row mb-2">
+      <div class="col-1">
+    <input action="action" type="button" class="secondary" value="<< Indietro" onclick="window.history.go(-1); return false;" />
+    </div>
+  </div>
+    <section class="section">
+
+
+
+       
+
+
+    <div class="row">
+	    <div class="col-10">
+         <!-- Default Card -->
+        <div class="card">
+          <div class="card-body">
+          <h5 class="card-title"></h5>
+          <!-- Small tables -->
+          <table class="table table-sm"> 
+            <thead>
+              <tr>
+                <th scope="col">Lavoratore</th>
+                <th scope="col"></th>
+                <th scope="col">Wage Lordo</th>
+                <th scope="col">Wage Netto</th>
+                <th scope="col">Tipologia Lavoro</th>
+
+              </tr>
+            </thead>                 
+          <tbody>
+            {% for one in personale %}
+            <tr>
+              <td ><a href="/personale/{{one.id}}" > {{one.cognome}} {{one.nome}} </a></td>
+              <td></td>
+              <td>{{one.wage_lordo}}</td>
+              <td>{{one.wage_netto}}</td>
+              <td>{{one.tipologia_lavoro}}</td>
+            </tr>
+            
+            
+            {% endfor %}
+          </tbody>
+            </table>
+            <!-- End small tables -->
+         
+           </div>
+        </div><!-- End Default Card -->
+
+      </div>   
+      <div class="col-10">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Assegnazione Lavoratori ai Cantieri</h5>
+      
+            <!-- Table Variants -->
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Lavoratore</th>
+                  <th scope="col">Cantiere</th>
+                  <th scope="col">Ore Lavorate</th>
+                  <th scope="col">Responsabile</th>
+                  <th width="100px" scope="col">Aggiungi Ore</th>
+                  <th width="100px" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for one in assegnato_cantiere %}
+                {% if one.cantiere.status %}
+                <tr>
+                  {% else %}
+                <tr class="table-warning">
+                  {% endif %}
+                  <th scope="row">{{one.personale}}</th>
+                  <td>{{one.cantiere}}</td>
+                  <td>{{one.ore_lavorate}}</td>
+                  <td>{{one.responsabile}}</td>
+                  {% if one.cantiere.status %}
+                  <td >
+                    <div class="">
+                      <input type="number" name="aggiungi_ore" id="{{one.id}}" placeholder="0.0" min="0" step="0.1" class="form-control">
+
+                    </div>
+                  </td>
+                  <td> 
+                    <button type="button" class="btn btn-success btn-sm" title="AGGIUNGI ORE" onclick="aggiungi_ore({{one.id}})"><i class="bi bi-check-circle"></i></button>
+                  </td>
+                
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm" title="RIMUOVI LAVORATORE DAL CANTIERE" onclick="removeLavoratoreDaCantiere({{one.id}})"><i class="bi bi-trash"></i></button>
+                  </td>
+                  {% else %}
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              
+                
+                
+                
+              </tbody>
+            </table>
+            <!-- End Table Variants -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <div class="row ">
+      <div class="col-10">
+      <table class="table table-sm">
+        <!--
+        <thead>
+          <tr>
+            <th scope="col">Lavoratore</th>
+            <th scope="col">Cantiere</th>
+            <th scope="col">Ore Lavorate</th>
+            <th scope="col">Responsabile</th>
+            <th width="100px" scope="col">Aggiungi Ore</th>
+            <th width="100px" scope="col"></th>
+          </tr>
+        </thead>
+        -->
+        <tbody>
+          <form method="POST" >{% csrf_token %} 
+          <tr class="table-secondary">
+          <td width="50px" style="vertical-align: middle;">
+            Assegna 
+          </td>
+          <td width="200px">
+            <select id="inputState" name="personale" class="form-select">
+              <option selected>Lavoratore...</option>
+              {% for one in personale %}
+              <option value="{{one.id}}">{{one}}</option>
+              {% endfor %}            </select>
+          </td>
+          <td width="100px"  style="vertical-align: middle;"> al Cantiere </td>
+          <td width="200px">
+            <select id="inputState" name="cantiere" class="form-select">
+            
+              <option selected>Cantiere...</option>
+              {% for one in cantieri %}
+              <option value="{{one.id}}">{{one}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td width="100px"  style="vertical-align: middle;"> Responsabile </td>
+          <td width="30px"  style="vertical-align: middle;"> <input class="form-check-input" name="responsabile" type="checkbox" id="gridCheck1"> </td>
+          <td width="50px"> 
+            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-check-circle"></i></button>
+          </td>
+          </tr>
+          </form>
+        </tbody>
+      </table>
+      </div>
+      <!--
+	    <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Assegnazione Lavoratori ai Cantieri</h5>
+      
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Lavoratore</th>
+                  <th scope="col">Cantiere</th>
+                  <th scope="col">Ore Lavorate</th>
+                  <th scope="col">Responsabile</th>
+                  <th width="100px" scope="col">Aggiungi Ore</th>
+                  <th width="100px" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for one in assegnato_cantiere %}
+                <tr>
+                  <th scope="row">{{one.personale}}</th>
+                  <td>{{one.cantiere}}</td>
+                  <td>{{one.ore_lavorate}}</td>
+                  <td>{{one.responsabile}}</td>
+                  <td>
+                    <div class="">
+                      <input type="number" placeholder="0.0" min="0" step="0.1" class="form-control">
+
+                    </div>
+                  </td>
+                  <td> 
+                    <button type="button" class="btn btn-success btn-sm"><i class="bi bi-check-circle"></i></button>
+
+                  </td>
+                </tr>
+                {% endfor %}
+              
+                
+                
+                
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+
+    </section>
+
+</main><!-- End #main -->
+<!--
+<div class="row">
+  
+ <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Multi Columns Form</h5>
+
+      <form class="row g-3">
+        <div class="col-md-12">
+          <label for="inputName5" class="form-label">Nome Cantiere</label>
+          <input type="text" name="nome" class="form-control" id="inputName5">
+        </div>
+        <div class="col-12">
+            <label for="id_descrizione" class="form-label">Descrizione</label>
+            <textarea name="descrizione" cols="40" rows="10" class="form-control" id="id_descrizione"></textarea>
+          </div>
+          <div class="col-12">
+            <label for="inputAddress5" class="form-label">Indirizzo</label>
+            <input type="text" class="form-control" id="inputAddress5" placeholder="1234 Main St">
+          </div>
+        <div class="col-md-6">
+          <label for="inputEmail5" class="form-label">Data Inizio Lavori</label>
+          <input type="date" name="data_inizio_lavori" class="form-control" id="inputEmail5">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword5" class="form-label">Data Fine Lavori</label>
+          <input type="date" name="data_fine_lavori" class="form-control" id="inputPassword5">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+
+    </div>
+  </div>     
+
+         
+      </div>
+
+ 
+-->
+
+
+

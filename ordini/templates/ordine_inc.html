@@ -1,0 +1,218 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Blank Page</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Blank</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+
+
+
+       
+
+
+      <div class="row">
+	     <div class="col-6">
+        <form class="form-control" action = "" method = "post">
+            {% csrf_token %}
+            {{form.as_p }}
+            <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Multi Columns Form</h5>
+
+              <!-- Multi Columns Form -->
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">Data Ordine</label>
+                  <input type="date" class="form-control" id="inputEmail5">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword5" class="form-label">Importo</label>
+                  <input type="password" class="form-control" id="inputPassword5">
+                </div>
+                <div class="col-md-12">
+                  <label for="inputName5" class="form-label">Your Name</label>
+                  <input type="text" class="form-control" id="inputName5">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail5">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword5" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="inputPassword5">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress5" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">State</label>
+                  <select id="inputState" class="form-select">
+                    <option selected>Cantiere</option>
+                    {% for one in cantieri %}
+                    <option value="{{one.id}}">{{one}}</option>
+                    {% endfor %}
+
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputZip" class="form-label">Zip</label>
+                  <input type="text" class="form-control" id="inputZip">
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                      Check me out
+                    </label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End Multi Columns Form -->
+
+            </div>
+          </div>
+
+        </div>   
+      </div>
+    </section>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{a.nome}}</h5>
+        <!-- Small tables -->
+      <table class="table table-sm">                  
+        <tbody>
+          <thead>
+            <th> ID Ordine</th>
+            <th> Data Ordine</th>
+            <th> Importo</th>
+            <th> Tipologia</th>
+            <th> Cantiere</th>
+            <th> Fornitore</th>
+            <th> Per Magazzino</th>
+            <th> Da Magazzino</th>
+          </thead>
+          {% for one in ordini %}
+        <tr>
+          <th scope="row">{{one.id}}</th>
+          <td>{{one.data_ordine}}</td>
+          <td>{{one.importo}}</td>
+          <td>{{one.tipologia}}</td>
+          <td>{{one.cantiere}}</td>
+          <td>{{one.fornitore}}</td>
+          <td>{{one.magazzino}}</td>
+          <td>{{one.mestesso}}</td>
+        </tr>
+        {% endfor %}
+        
+       
+        
+        
+        </tbody>
+      </table>
+      <!-- End small tables -->       
+        </div>
+      </div><!-- End Default Card -->
+    </div>
+</main><!-- End #main -->
+<!--
+<div class="row">
+  
+ <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Multi Columns Form</h5>
+
+      <form class="row g-3">
+        <div class="col-md-12">
+          <label for="inputName5" class="form-label">Nome Cantiere</label>
+          <input type="text" name="nome" class="form-control" id="inputName5">
+        </div>
+        <div class="col-12">
+            <label for="id_descrizione" class="form-label">Descrizione</label>
+            <textarea name="descrizione" cols="40" rows="10" class="form-control" id="id_descrizione"></textarea>
+          </div>
+          <div class="col-12">
+            <label for="inputAddress5" class="form-label">Indirizzo</label>
+            <input type="text" class="form-control" id="inputAddress5" placeholder="1234 Main St">
+          </div>
+        <div class="col-md-6">
+          <label for="inputEmail5" class="form-label">Data Inizio Lavori</label>
+          <input type="date" name="data_inizio_lavori" class="form-control" id="inputEmail5">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword5" class="form-label">Data Fine Lavori</label>
+          <input type="date" name="data_fine_lavori" class="form-control" id="inputPassword5">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+
+    </div>
+  </div>     
+
+         
+      </div>
+
+ 
+-->
+
+
+
