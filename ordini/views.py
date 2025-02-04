@@ -56,9 +56,12 @@ class OrdineAdd(CreateView):
         context ={}
         context['form']= FormOrdine(azienda=request.session['azienda'])
         a = Azienda.objects.get(pk=request.session['azienda'])
-        context['ordini'] = a.getOrdini()
+        context['tipologia'] = Ordine().TipologiaFornitore
+        #context['ordini'] = a.getOrdini()
         context['cantieri'] = a.getCantieri()
-        return render(request, "ordine.html", context)
+        context['fornitori'] = a.azienda_fornitore.all()
+
+        return render(request, "ordine_nuovo.html", context)
     
 
 

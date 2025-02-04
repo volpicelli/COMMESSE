@@ -197,38 +197,61 @@
     </div>
 </div>
 <div class="row">
-<div class="col-lg-7">
+<div class="col-lg-12">
       
   <!-- Default Card -->
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Costo Totale del Cantiere</h5>
       <!-- Small tables -->
-      <table class="table table-sm"> 
-        <thead>
-          <tr>
-            <th scope="col">Ordini</th>
-            <th scope="col">{{ordini|length}} effettuati </th>
-            <th scope="col">per un totale di {{totale_ordini}} Euro</th>
-            <th scope="col">Totale Lordo</th>
-            <th scope="col">Azione</th>
-
-          </tr>
-        </thead>                 
-      <tbody>
-        {% for one in personaleassegnato %}
-        <tr>
-          <td >{{one.personale.cognome}} {{one.personale.nome}}</td>
-          <td></td>
-          <td>{{one.ore_lavorate}}</td>
-          <td>{{one.totale_lordo}}</td>
-          <td>Aggiungi Ore</td>
-        </tr>
+       <div class="row">
+        <div class="col-md-2">
+          Costo Ordini 
+        </div>
+        <div class="col-md-3">
+          {{ordini|length}} effettuati 
+        </div>
+        <div class="col-md-3">
+          per un totale di Euro
+        </div>
+        <div class="col-md-4">
+          {{totale_ordini}} 
+        </div>
+       </div>
+       {% for one in personaleassegnato %}
+       <div class="row">
+        <div class="col-md-2">
+          Personale
+        </div>
+        <div class="col-md-3">
+          {{one.personale.cognome}} {{one.personale.nome}}
+        </div>
+        <div class="col-md-2">
+          Ore Lavorate {{one.ore_lavorate}}
+         </div>
+         <div class="col-md-3">
+            {{one.totale_lordo}}
+         </div>
         
+       </div>
+       {% endfor %}
+       <div class="row">
+        <div class="col-md-2">
+         Costo Totale Personale
+        </div>
+        <div class="col-md-4">
+          
+        </div>
+        <div class="col-md-2">
+          
+         </div>
+         <div class="col-md-4">
+          {{totalepersonale}}
+         </div>
         
-        {% endfor %}
-      </tbody>
-    </table>
+       </div>
+      
+      
        <!-- End small tables -->
      
     </div>

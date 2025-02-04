@@ -71,6 +71,10 @@ class CantiereDetail(DetailView):
         ordini = cantiere.GetOrdini()
         fatture = cantiere.GetFatture()
         personaleassegnato = cantiere.cantiere_assegnato.all()
+        totale=0
+        for one in personaleassegnato:
+            tot = one.ore_lavorate * one.personale.wage_lordo
+            totale+=tot
 
 
 
@@ -81,6 +85,9 @@ class CantiereDetail(DetailView):
         totale_ordini = ordini.aggregate(Sum('importo'))
         context['totale_ordini'] = totale_ordini['importo__sum']
         context['personaleassegnato']= personaleassegnato
+        context['totalepersonale']= totale
+
+
         
         return render(request, "cantiere_detail.html", context)
 """

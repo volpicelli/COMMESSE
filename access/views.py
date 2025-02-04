@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 class Authenticate(View):
@@ -83,3 +83,7 @@ class Login(View):
         return HttpResponse(template.render(context, request))
 
 
+class Logout(View):
+    def get(self,request):
+        logout(request)
+        return HttpResponseRedirect('/access')
