@@ -6,7 +6,7 @@
   {% endblock css %}
 
   {% block main %}
-  {% include './ordine_nuovo_inc.html' %}
+  {% include './ordine_nuovo_permagazziino_inc.html' %}
   {% endblock main %}
 
 
@@ -17,16 +17,5 @@
   function aggiungiarticoli(){
     $('#aggiungiarticoli').removeClass('d-none')
   }
-</script>
-<script>
-
-  descr=[]
-  {% for one in magazzino %}
-  descr.push("{{one.descrizione}}");
-  {% endfor %}
-
-  $( "#tags" ).autocomplete({
-      source: descr
-    });
 </script>
 {% endblock javascript %}

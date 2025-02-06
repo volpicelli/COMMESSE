@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import OrdineAdd,OrdiniList,OrdiniListDaMagazzino,OrdiniListPerMagazzino,OrdineUpdate
+from .views import OrdineAdd,OrdiniList,OrdiniListDaMagazzino,OrdiniListPerMagazzino,OrdineUpdate #,\
+                        #OrdiniPerMagazzinoAdd
 from home.models import Ordine
 
 
@@ -10,6 +11,7 @@ urlpatterns = [
         path('list', OrdiniList.as_view()),
         path('damagazzino/list', OrdiniListDaMagazzino.as_view()),
         path('permagazzino/list', OrdiniListPerMagazzino.as_view()),
+       # path('permagazzino/add', OrdiniPerMagazzinoAdd.as_view()),
 
         
         

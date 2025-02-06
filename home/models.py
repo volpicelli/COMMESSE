@@ -393,7 +393,7 @@ class Magazzino(models.Model):
     quantita = models.IntegerField(blank=True, null=True)
     prezzo_unitario = models.DecimalField(max_digits=19,blank=True,null=True,decimal_places=2)
     importo_totale = models.DecimalField(max_digits=19,blank=True,null=True,decimal_places=2) 
-    ordine = models.ForeignKey(Ordine,null=True,on_delete=models.CASCADE,related_name='ordine_magazzino')
+    azienda = models.ForeignKey(Azienda,null=True,on_delete=models.CASCADE,related_name='azienda_magazzino')
 
     class Meta:
         managed = True

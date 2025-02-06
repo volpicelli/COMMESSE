@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views.generic  import View,CreateView,ListView
 from django.views.generic.edit import UpdateView
+from django.db.models import Sum,Avg
 
 
 
@@ -8,7 +9,7 @@ from django.template import loader
 from django.template import Template, Context
 from django.http import HttpResponse,HttpResponseRedirect
 from .form_ordini import FormOrdine
-from home.models import Ordine,Fornitori,Azienda
+from home.models import Ordine,Fornitori,Azienda,Magazzino
 
 # Create your views here.
 #class CantiereDetail(DetailView):
@@ -42,7 +43,8 @@ class OrdiniListPerMagazzino(ListView):
         context['ordini'] = a.getOrdini().filter(magazzino=True).order_by('id')
         #context['cantieri'] = a.getCantieri()
         return render(request, "ordinilist_permagazzino.html", context)
-      
+#class OrdiniPerMagazzinoAdd(CreateView):
+    
 class OrdineAdd(CreateView):
     model=Ordine
     form_class = FormOrdine
@@ -60,6 +62,8 @@ class OrdineAdd(CreateView):
         #context['ordini'] = a.getOrdini()
         context['cantieri'] = a.getCantieri()
         context['fornitori'] = a.azienda_fornitore.all()
+        context['magazzino'] = Magazzino.objects.values('descrizione').annotate(quantita=Sum('quantita'),prezzo=Avg('prezzo_unitario')).filter(azienda=a)
+
 
         return render(request, "ordine_nuovo.html", context)
     

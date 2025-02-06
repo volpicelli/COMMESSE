@@ -51,6 +51,7 @@ urlpatterns = [
     path('personale/', include('personale.urls')),
     path('ordini/', include('ordini.urls')),
     path('fatture/', include('fatture.urls')),
+    path('magazzino/', include('magazzino.urls')),
     #path('email', SendEmail.as_view()),
     #re_path(r'^playground/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     #re_path(r'^docs/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
