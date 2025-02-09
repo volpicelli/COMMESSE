@@ -19,13 +19,34 @@
   }
 </script>
 <script>
-
+  function removearticolo(el){
+    thisrow = $(el).parent().parent();
+    if ( $(thisrow).hasClass('primo') ) {
+      $('#aggiungiarticoli').addClass('d-none')
+    } else {
+    $(thisrow).remove()
+    }
+  }
+function addarticolo(el){
+  thisrow = $(el).parent().parent();
+  newrow = ' <tr> \
+          <td><input class="pollo" id="tags" ></td> \
+          <td><input id="quantita" ></td> \
+          <td><input id="prezzo" ></td> \
+          <td> <button type="button" onclick="addarticolo(this)" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" onclick="removearticolo(this)" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td> \
+        </tr>';
+   $(thisrow).after(newrow);     
+   $( ".pollo" ).autocomplete({
+      source: descr
+    });
+  console.log($(el).parent().parent())
+}
   descr=[]
   {% for one in magazzino %}
   descr.push("{{one.descrizione}}");
   {% endfor %}
 
-  $( "#tags" ).autocomplete({
+  $( ".pollo" ).autocomplete({
       source: descr
     });
 </script>

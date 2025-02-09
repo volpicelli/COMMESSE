@@ -15,6 +15,11 @@
       -->
     </div><!-- End Page Title -->
 
+    <div class="row mb-2">
+      <div class="col-1">
+    <input action="action" type="button" class="secondary" value="<< Indietro" onclick="window.history.go(-1); return false;" />
+    </div>
+  </div>
     <section class="section">
 
 
@@ -36,10 +41,19 @@
         <div class="col-10">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Nuovo Ordine </h5>
+              <h5 class="card-title">Nuovo Ordine per il </h5>
               <!-- Multi Columns Form -->
               <form class="row g-3">
-                
+                <div class="col-md-4">
+                  <label for="cantiere" class="form-label">Cantiere</label>
+                  <select id="cantiere" class="form-select">
+                    <option selected>Cantiere</option>
+                    {% for one in cantieri %}
+                    <option value="{{one.id}}" >{{one}}</option>
+                    {% endfor %}
+
+                  </select>
+                </div>
 
                 <div class="col-md-4">
                   <label for="dataordine" class="form-label">Data Ordine</label>
@@ -66,16 +80,7 @@
 
                   </select>
                 </div>
-                <div class="col-md-4">
-                  <label for="cantiere" class="form-label">Cantiere</label>
-                  <select id="cantiere" class="form-select">
-                    <option selected>Cantiere</option>
-                    {% for one in cantieri %}
-                    <option value="{{one.id}}" >{{one}}</option>
-                    {% endfor %}
-
-                  </select>
-                </div>
+                
                 <div class="col-md-4">
                   <label for="cantiere" class="form-label">Tipologia</label>
                   <select id="cantiere" class="form-select">
@@ -124,11 +129,11 @@
             
           </thead>
          
-        <tr>
-          <td><input id="tags" ></td>
+        <tr class="primo">
+          <td><input class="pollo" id="tags" ></td>
           <td><input id="quantita" ></td>
           <td><input id="prezzo" ></td>
-          <td> <button type="button" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td>
+          <td> <button type="button" onclick="addarticolo(this)" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" onclick="removearticolo(this)" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td>
           
         </tr>
        
