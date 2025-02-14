@@ -38,7 +38,7 @@
             <div class="card-body">
               <h5 class="card-title">Modifica Ordine </h5>
               <!-- Multi Columns Form -->
-              <form class="row g-3">
+              <form class="row g-3" method="POST">{% csrf_token %} 
                 <div class="col-md-4">
                   <label for="id" class="form-label">ID Ordine</label>
                   <input type="text" class="form-control" name="id"   value="{{ordine.id}}" id="id">
@@ -94,11 +94,7 @@
                 
                
                 
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form><!-- End Multi Columns Form -->
+              
 
             </div>
           </div>
@@ -106,117 +102,48 @@
         </div>   
       </div>
     </section>
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{a.nome}}</h5>
-        <!-- Small tables -->
-      <table class="table table-sm">                  
-        <tbody>
-          <thead>
-            <th> ID Articolo</th>
-            <th> Descrizione</th>
-            <th> Quantita`</th>
-            <th> Prezzo Unitario</th>
-            <th> Importo Totale</th>
-            <th> ID Ordine</th>
+    <div class="d-flex justify-content-end ">
+     
+      <button type="button" class=" btn btn-light rounded-pill mt-3" onclick="aggiungiarticoli()">
+       <i class="bi bi-cart-plus"></i> Aggiungi Articoli  
+      </button>
+      
+      </div>
+      <div id="aggiungiarticoli" class="card d-none">
+        <div class="card-body">
+          <h5 class="card-title">{{a.nome}}</h5>
+          <!-- Small tables -->
+        <table class="table table-sm">                  
+          <tbody>
+            <thead>
+              <th> Descrizione</th>
+              <th> Quantita`</th>
+              <th> Prezzo Unitario</th>
+              <th> </th>
+              
+            </thead>
+           
+          <tr class="primo">
+            <td><input class="pollo" name="descrizione" ></td>
+            <td><input name="quantita" ></td>
+            <td><input name="prezzo_unitario" ></td>
+            <td> <button type="button" onclick="addarticolo(this)" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" onclick="removearticolo(this)" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td>
             
-          </thead>
-          {% for one in articoli %}
-        <tr>
-          <th scope="row">{{one.id}}</th>
-          <td>{{one.descrizione}}</td>
-          <td>{{one.quantita}}</td>
-          <td>{{one.prezzo_unitario}}</td>
-          <td>{{one.quantita | multiply:one.prezzo_unitario}}</td>
-          <td>{{one.ordine}}</td>
+          </tr>
+         
           
-        </tr>
-        {% endfor %}
-        
-       
-        
-        
-        </tbody>
-      </table>
-      <!-- End small tables -->       
-        </div>
-      </div><!-- End Default Card -->
+         
+          
+          
+          </tbody>
+        </table>
+        <!-- End small tables -->       
+          </div>
+        </div><!-- End Default Card -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form><!-- End Multi Columns Form -->
     </div>
 </main><!-- End #main -->
-<!--
-<div class="row">
-  
- <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Multi Columns Form</h5>
-
-      <form class="row g-3">
-        <div class="col-md-12">
-          <label for="inputName5" class="form-label">Nome Cantiere</label>
-          <input type="text" name="nome" class="form-control" id="inputName5">
-        </div>
-        <div class="col-12">
-            <label for="id_descrizione" class="form-label">Descrizione</label>
-            <textarea name="descrizione" cols="40" rows="10" class="form-control" id="id_descrizione"></textarea>
-          </div>
-          <div class="col-12">
-            <label for="inputAddress5" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control" id="inputAddress5" placeholder="1234 Main St">
-          </div>
-        <div class="col-md-6">
-          <label for="inputEmail5" class="form-label">Data Inizio Lavori</label>
-          <input type="date" name="data_inizio_lavori" class="form-control" id="inputEmail5">
-        </div>
-        <div class="col-md-6">
-          <label for="inputPassword5" class="form-label">Data Fine Lavori</label>
-          <input type="date" name="data_fine_lavori" class="form-control" id="inputPassword5">
-        </div>
-        <div class="col-12">
-          <label for="inputAddress" class="form-label">Address</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-        </div>
-        <div class="col-12">
-          <label for="inputAddress2" class="form-label">Address 2</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        </div>
-        <div class="col-md-6">
-          <label for="inputCity" class="form-label">City</label>
-          <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">State</label>
-          <select id="inputState" class="form-select">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label for="inputZip" class="form-label">Zip</label>
-          <input type="text" class="form-control" id="inputZip">
-        </div>
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-              Check me out
-            </label>
-          </div>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-secondary">Reset</button>
-        </div>
-      </form>
-
-    </div>
-  </div>     
-
-         
-      </div>
-
- 
--->
-
-
-

@@ -9,7 +9,7 @@ from django.template import loader
 from django.template import Template, Context
 from django.http import HttpResponse,HttpResponseRedirect
 from .form_ordini import FormOrdine
-from home.models import Ordine,Fornitori,Azienda,Magazzino
+from home.models import Ordine,Fornitori,Azienda,Magazzino,Articoli
 
 # Create your views here.
 #class CantiereDetail(DetailView):
@@ -54,22 +54,32 @@ class OrdineAdd(CreateView):
     #a_table = Table(auto__model=Cantiere)
 
 
-    def get(self,request):
-        context ={}
-        context['form']= FormOrdine(azienda=request.session['azienda'])
-        a = Azienda.objects.get(pk=request.session['azienda'])
-        context['tipologia'] = Ordine().TipologiaFornitore
-        #context['ordini'] = a.getOrdini()
-        context['cantieri'] = a.getCantieri()
-        context['fornitori'] = a.azienda_fornitore.all()
-        context['magazzino'] = Magazzino.objects.values('descrizione').annotate(quantita=Sum('quantita'),prezzo=Avg('prezzo_unitario')).filter(azienda=a)
+    def get(self,request,cantiere_id=None):
+        if cantiere_id is None:
+            context ={}
+            context['form']= FormOrdine(azienda=request.session['azienda'])
+            a = Azienda.objects.get(pk=request.session['azienda'])
+            context['tipologia'] = Ordine().TipologiaFornitore
+            #context['ordini'] = a.getOrdini()
+            context['cantieri'] = a.getCantieri()
+            context['fornitori'] = a.azienda_fornitore.all()
+            context['articoli'] = Articoli.objects.values('descrizione').annotate(quantita=Sum('quantita'),prezzo=Avg('prezzo_unitario')).all() #filter(azienda=a)
+        else:
+            context ={}
+            context['form']= FormOrdine(azienda=request.session['azienda'])
+            a = Azienda.objects.get(pk=request.session['azienda'])
+            context['tipologia'] = Ordine().TipologiaFornitore
+            #context['ordini'] = a.getOrdini()
+            context['cantieri'] = a.getCantieri().filter(pk=cantiere_id)
+            context['fornitori'] = a.azienda_fornitore.all()
+            context['articoli'] = Articoli.objects.values('descrizione').annotate(quantita=Sum('quantita'),prezzo=Avg('prezzo_unitario')).all() #.filter(azienda=a)
 
 
         return render(request, "ordine_nuovo.html", context)
     
 
 
-    def post(self,request):
+    def post(self,request,cantiere_id=None):
         #id = request.POST.get['cliente']
         #cl =Cliente.objects.get(pk=id) 
         form = FormOrdine(request.POST,azienda=request.session['azienda'])

@@ -30,9 +30,9 @@
 function addarticolo(el){
   thisrow = $(el).parent().parent();
   newrow = ' <tr> \
-          <td><input class="pollo" id="tags" ></td> \
-          <td><input id="quantita" ></td> \
-          <td><input id="prezzo" ></td> \
+          <td><input class="pollo" name="descrizione" ></td> \
+          <td><input name="quantita" ></td> \
+          <td><input name="prezzo_unitario" ></td> \
           <td> <button type="button" onclick="addarticolo(this)" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" onclick="removearticolo(this)" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td> \
         </tr>';
    $(thisrow).after(newrow);     
@@ -42,7 +42,7 @@ function addarticolo(el){
   console.log($(el).parent().parent())
 }
   descr=[]
-  {% for one in magazzino %}
+  {% for one in articoli %}
   descr.push("{{one.descrizione}}");
   {% endfor %}
 

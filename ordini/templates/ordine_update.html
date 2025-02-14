@@ -12,4 +12,42 @@
 
 {% block javascript %}
 {{ block.super }}
+<script>
+
+  function aggiungiarticoli(){
+    $('#aggiungiarticoli').removeClass('d-none')
+  }
+</script>
+<script>
+  function removearticolo(el){
+    thisrow = $(el).parent().parent();
+    if ( $(thisrow).hasClass('primo') ) {
+      $('#aggiungiarticoli').addClass('d-none')
+    } else {
+    $(thisrow).remove()
+    }
+  }
+function addarticolo(el){
+  thisrow = $(el).parent().parent();
+  newrow = ' <tr> \
+          <td><input class="pollo" name="descrizione" ></td> \
+          <td><input name="quantita" ></td> \
+          <td><input name="prezzo_unitario" ></td> \
+          <td> <button type="button" onclick="addarticolo(this)" class="btn btn-success"><i class="bi bi-plus-circle"></i></button> <button type="button" onclick="removearticolo(this)" class="btn btn-warning"><i class="bi bi-trash"></i></button> </td> \
+        </tr>';
+   $(thisrow).after(newrow);     
+   $( ".pollo" ).autocomplete({
+      source: descr
+    });
+  console.log($(el).parent().parent())
+}
+  descr=[]
+  {% for one in articoli %}
+  descr.push("{{one.descrizione}}");
+  {% endfor %}
+
+  $( ".pollo" ).autocomplete({
+      source: descr
+    });
+</script>
 {% endblock javascript %}

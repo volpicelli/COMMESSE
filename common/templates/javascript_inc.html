@@ -21,7 +21,10 @@ crossorigin="anonymous"></script>
   <script>
     //find('.nav-item').
     CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
+    console.log('CURRENT_URL',CURRENT_URL)
     var pathname = new URL(CURRENT_URL).pathname;
+    console.log('pathname',pathname)
+
     $('#sidebar').find('a[href="' + pathname + '"]').addClass('active').parents('ul').slideDown();
 
     $('#sidebar').find('a').on('click', function (ev) { 

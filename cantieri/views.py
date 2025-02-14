@@ -73,7 +73,7 @@ class CantiereDetail(DetailView):
         personaleassegnato = cantiere.cantiere_assegnato.all()
         totale=0
         for one in personaleassegnato:
-            tot = one.ore_lavorate * one.personale.wage_lordo
+            tot = float(one.ore_lavorate * one.personale.wage_lordo)
             totale+=tot
 
 
@@ -83,9 +83,13 @@ class CantiereDetail(DetailView):
         context['cantiere']= cantiere
         context['ordini']= ordini
         totale_ordini = ordini.aggregate(Sum('importo'))
+        if totale_ordini['importo__sum'] is None:
+            totale_ordini['importo__sum']=0.0
         context['totale_ordini'] = totale_ordini['importo__sum']
         context['personaleassegnato']= personaleassegnato
         context['totalepersonale']= totale
+        
+        context['totalecantiere']= totale + totale_ordini['importo__sum']
 
 
         

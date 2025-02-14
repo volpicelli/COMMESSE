@@ -204,20 +204,7 @@
     <div class="card-body">
       <h5 class="card-title">Costo Totale del Cantiere</h5>
       <!-- Small tables -->
-       <div class="row">
-        <div class="col-md-2">
-          Costo Ordini 
-        </div>
-        <div class="col-md-3">
-          {{ordini|length}} effettuati 
-        </div>
-        <div class="col-md-3">
-          per un totale di Euro
-        </div>
-        <div class="col-md-4">
-          {{totale_ordini}} 
-        </div>
-       </div>
+      
        {% for one in personaleassegnato %}
        <div class="row">
         <div class="col-md-2">
@@ -235,7 +222,7 @@
         
        </div>
        {% endfor %}
-       <div class="row">
+      <div class="row">
         <div class="col-md-2">
          Costo Totale Personale
         </div>
@@ -249,7 +236,35 @@
           {{totalepersonale}}
          </div>
         
-       </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          Costo Ordini 
+        </div>
+        <div class="col-md-3">
+          {{ordini|length}} effettuati 
+        </div>
+        <div class="col-md-3">
+          per un totale di Euro
+        </div>
+        <div class="col-md-4">
+          {{totale_ordini}} 
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+         <b> Costo Totale Cantiere </b>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+        <b>  {{totalecantiere}} </b>
+        </div>
+      </div>
       
       
        <!-- End small tables -->
